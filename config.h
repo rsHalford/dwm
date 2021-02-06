@@ -6,8 +6,8 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int minsz     = 20;       /* Minimal height of a client for smfact */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "JetBrains Mono:size=10:antialias=true", "Twitter Color Emoji:pixelsize=10:antialias=true:autohint=true", "Noto Color Emoji:pixelsize=10:antialias=true:autohint=true" };
-static const char dmenufont[]       = "JetBrains Mono:size=10:antialias=true";
+static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=10:antialias=true", "Twitter Color Emoji:pixelsize=10:antialias=true:autohint=true", "Noto Color Emoji:pixelsize=10:antialias=true:autohint=true" };
+static const char dmenufont[]       = "JetBrainsMono Nerd Font:size=10:antialias=true";
 static const char col_gray1[]       = "#1d2021";
 static const char col_gray2[]       = "#928374";
 static const char col_gray3[]       = "#ebdbb2";
