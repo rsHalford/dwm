@@ -8,19 +8,35 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=10:antialias=true", "Twitter Color Emoji:pixelsize=14:antialias=true:autohint=true", "Noto Color Emoji:pixelsize=14:antialias=true:autohint=true" };
 static const char dmenufont[]       = "JetBrainsMono Nerd Font:size=10:antialias=true";
-static const char col_gray1[]       = "#1d2021";
-static const char col_gray2[]       = "#928374";
-static const char col_gray3[]       = "#ebdbb2";
-static const char col_gray4[]       = "#ebdbb2";
-static const char col_cyan[]        = "#1d2021";
+static const char col_black[]       = "#1d2021";
+static const char col_gray1[]       = "#32302f";
+static const char col_gray2[]       = "#665c54";
+static const char col_gray3[]       = "#928474";
+static const char col_gray4[]       = "#a89984";
+static const char col_white[]       = "#ebdbb2";
+static const char col_red[]         = "#cc241d";
+static const char col_green[]       = "#98971a";
+static const char col_yellow[]      = "#d79921";
+static const char col_blue[]        = "#458588";
+static const char col_purple[]      = "#b16286";
+static const char col_cyan[]        = "#689d6a";
+static const char col_orange[]      = "#d65d0e";
+
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	/*               fg             bg          border   */
+	[SchemeNorm]  =  { col_gray2,   col_black,  col_gray2 },
+	[SchemeSel]   =  { col_white,   col_black,  col_white },
+  [SchemeRed]   =	 { col_red,     col_gray1,  col_gray2 },
+	[SchemeGreen] =	 { col_green,   col_gray1,  col_gray2 },
+	[SchemeYellow]=  { col_yellow,  col_gray1,  col_gray2 },
+	[SchemeBlue]  =  { col_blue,    col_gray1,  col_gray2 },
+	[SchemePurple]=  { col_purple,  col_gray1,  col_gray2 },
+	[SchemeCyan]  =  { col_cyan,    col_gray1,  col_gray2 },
+	[SchemeOrange]=  { col_orange,  col_gray1,  col_gray2 },
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -70,8 +86,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_l,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-    { MODKEY,                       XK_j,      setsmfact,      {.f = -0.05} },
-    { MODKEY,                       XK_k,      setsmfact,      {.f = +0.05} },
+  { MODKEY,                       XK_j,      setsmfact,      {.f = -0.05} },
+  { MODKEY,                       XK_k,      setsmfact,      {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },

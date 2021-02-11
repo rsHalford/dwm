@@ -59,7 +59,7 @@
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel }; /* color schemes */
+enum { SchemeNorm, SchemeSel, SchemeRed, SchemeGreen, SchemeYellow, SchemeBlue, SchemePurple, SchemeCyan, SchemeOrange, }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
@@ -711,13 +711,27 @@ drawbar(Monitor *m)
 	int boxs = drw->fonts->h / 9;
 	int boxw = drw->fonts->h / 6 + 2;
 	unsigned int i, occ = 0, urg = 0;
+  char *ts = stext;
+  char *tp = stext;
+  int tx = 0;
+  char ctmp;
 	Client *c;
 
 	/* draw status first so it can be overdrawn by tags later */
   if (m == statmon) { /* status is only drawn on user-defined status monitor */
 		drw_setscheme(drw, scheme[SchemeNorm]);
 		tw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
-		drw_text(drw, m->ww - tw, 0, tw, bh, 0, stext, 0);
+    while (1) {
+			if ((unsigned int)*ts > LENGTH(colors)) { ts++; continue ; }
+			ctmp = *ts;
+			*ts = '\0';
+		  drw_text(drw, m->ww - tw, 0, tw, bh, 0, stext, 0);
+			tx += TEXTW(tp) -lrpad;
+			if (ctmp == '\0') { break; }
+			drw_setscheme(drw, scheme[(unsigned int)(ctmp-1)]);
+			*ts = ctmp;
+			tp = ++ts;
+		}
 	}
 
 	for (c = m->clients; c; c = c->next) {
@@ -735,7 +749,7 @@ drawbar(Monitor *m)
 		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
         if (occ & 1 << i)
-            drw_rect(drw, x + boxw, 0, w - ( 2 * boxw + 1 ), boxw,
+            drw_rect(drw, x + boxw, 0, w - ( boxw + 3 ), boxw - 3,
                     m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
                     urg & 1 << i);
 		x += w;
@@ -2217,12 +2231,17 @@ main(int argc, char *argv[])
 {
 	if (argc == 2 && !strcmp("-v", argv[1]))
 		die("dwm-"VERSION);
-	else if (argc != 1)
+  else if (argc != 1 && strcmp("-s", argv[1]))
 		die("usage: dwm [-v]");
 	if (!setlocale(LC_CTYPE, "") || !XSupportsLocale())
 		fputs("warning: no locale support\n", stderr);
 	if (!(dpy = XOpenDisplay(NULL)))
 		die("dwm: cannot open display");
+  if (argc > 1 && !strcmp("-s", argv[1])) {
+		XStoreName(dpy, RootWindow(dpy, DefaultScreen(dpy)), argv[2]);
+		XCloseDisplay(dpy);
+		return 0;
+	}
 	checkotherwm();
 	setup();
 #ifdef __OpenBSD__

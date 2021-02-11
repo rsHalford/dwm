@@ -8,15 +8,31 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
+static const char col_black[]       = "#000000";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+static const char col_white[]       = "#ffffff";
+static const char col_red[]         = "#ff0000";
+static const char col_green[]       = "#00ff00";
+static const char col_yellow[]      = "#ffff00";
+static const char col_blue[]        = "#0000ff";
+static const char col_purple[]      = "#800080";
+static const char col_cyan[]        = "#00ffff";
+static const char col_orange[]      = "#ffa500";
+
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeNorm]  =  { col_gray3, col_gray1, col_gray2 },
+	[SchemeSel]   =  { col_gray4, col_cyan,  col_cyan  },
+  [SchemeRed]   =	 { col_red, col_gray1, col_gray2 },
+	[SchemeGreen] =	 { col_yellow, col_gray1, col_gray2 },
+	[SchemeYellow]=  { col_orange, col_gray1, col_gray2},
+	[SchemeBlue]  =  { col_green, col_gray1, col_gray2},
+	[SchemePurple]=  { col_cyan, col_gray1, col_gray2},
+	[SchemeCyan]  =  { col_cyan, col_gray1, col_gray2},
+	[SchemeOrange]=  { col_cyan, col_gray1, col_gray2},
 };
 
 /* staticstatus */
