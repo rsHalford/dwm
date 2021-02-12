@@ -74,10 +74,6 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
-/* commands spawned when clicking statusbar, the mouse button pressed is exported as BUTTON */
-static char *statuscmds[] = { "email", "updates", "cpu_usage", "cpu_temp", "memory", "storage", "internet", "battery", "volume", "weather", "calendar", "clock" };
-static char *statuscmd[] = { "/bin/sh", "-c", NULL, NULL };
-
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_s,      spawn,          {.v = dmenucmd } },
@@ -124,9 +120,7 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-  { ClkStatusText,        0,              Button1,        spawn,          {.v = statuscmd } },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = statuscmd } },
-	{ ClkStatusText,        0,              Button3,        spawn,          {.v = statuscmd } },
+	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
