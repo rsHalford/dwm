@@ -6,11 +6,11 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int minsz     = 20;       /* Minimal height of a client for smfact */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=10:antialias=true", "Twitter Color Emoji:pixelsize=14:antialias=true:autohint=true", "Noto Color Emoji:pixelsize=14:antialias=true:autohint=true" };
-static const char dmenufont[]       = "JetBrainsMono Nerd Font:size=10:antialias=true";
+static const char *fonts[]          = { "JetBrains Mono:size=10:antialias=true", "siji:pixelsize=16", "Twitter Color Emoji:pixelsize=14:antialias=true:autohint=true" };
+static const char dmenufont[]       = "JetBrains Mono:size=10:antialias=true";
 static const char col_black[]       = "#1d2021";
-static const char col_gray1[]       = "#32302f";
-static const char col_gray2[]       = "#665c54";
+static const char col_gray1[]       = "#282828";
+static const char col_gray2[]       = "#32302f";
 static const char col_gray3[]       = "#928474";
 static const char col_gray4[]       = "#a89984";
 static const char col_white[]       = "#ebdbb2";
@@ -23,20 +23,18 @@ static const char col_cyan[]        = "#689d6a";
 static const char col_orange[]      = "#d65d0e";
 
 static const char *colors[][3]      = {
-	/*               fg             bg          border   */
-	[SchemeNorm]  =  { col_gray3,   col_black,  col_gray3   },
-	[SchemeSel]   =  { col_white,   col_black,  col_white   },
-  [SchemeRed]   =	 { col_red,     col_black,  col_red,    },
-	[SchemeGreen] =	 { col_green,   col_black,  col_green,  },
-	[SchemeYellow]=  { col_yellow,  col_black,  col_yellow, },
-	[SchemeBlue]  =  { col_blue,    col_black,  col_blue,   },
-	[SchemePurple]=  { col_purple,  col_black,  col_purple, },
-	[SchemeCyan]  =  { col_cyan,    col_black,  col_cyan,   },
-	[SchemeOrange]=  { col_orange,  col_black,  col_orange, },
+	/*                    fg            bg          border*/
+	[SchemeNorm]      =   { col_gray3,  col_gray1,  col_gray1 },
+	[SchemeSel]       =   { col_white,  col_gray1,  col_gray2 },
+	[SchemeTagsNorm]  =   { col_gray3,  col_gray1,  col_gray1 },
+	[SchemeTagsSel]   =   { col_yellow, col_gray1,  col_gray1 },
+	[SchemeInfoNorm]  =   { col_gray3,  col_gray1,  col_gray1 },
+	[SchemeInfoSel]   =   { col_white,  col_gray1,  col_gray1 },
+  [SchemeStatus]    =   { col_gray3,  col_gray1,  col_gray1 },
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
+static const char *tags[] = { "\ue187", "\ue188", "\ue189", "\ue18a", "\ue18b", "\ue18c", "\ue18d", "\ue18e", "\ue18f" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -55,9 +53,9 @@ static const int resizehints = 0;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]",       tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
+	{ "\ue002",      tile },    /* first entry is default */
+	{ "\ue006",      NULL },    /* no layout function means floating behavior */
+	{ "\ue001",      monocle },
 };
 
 /* key definitions */
@@ -75,6 +73,10 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
+
+/* commands spawned when clicking statusbar, the mouse button pressed is exported as BUTTON */
+static char *statuscmds[] = { "email", "updates", "cpu_usage", "cpu_temp", "memory", "storage", "internet", "battery", "volume", "weather", "calendar", "clock" };
+static char *statuscmd[] = { "/bin/sh", "-c", NULL, NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -122,7 +124,9 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+  { ClkStatusText,        0,              Button1,        spawn,          {.v = statuscmd } },
+	{ ClkStatusText,        0,              Button2,        spawn,          {.v = statuscmd } },
+	{ ClkStatusText,        0,              Button3,        spawn,          {.v = statuscmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
