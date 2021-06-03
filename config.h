@@ -33,6 +33,17 @@ static const char *colors[][3]      = {
   [SchemeStatus]    =   { col_gray3,  col_gray1,  col_gray1 },
 };
 
+/* scratchpads */
+typedef struct {
+	const char *name;
+	const void *cmd;
+} Sp;
+const char *spcmd1[] = {"st", "-n", "spterm", "-g", "80x34", NULL };
+static Sp scratchpads[] = {
+	/* name          cmd  */
+	{"spterm",      spcmd1},
+};
+
 /* tagging */
 static const char *tags[] = { "\ue187", "\ue188", "\ue189", "\ue18a", "\ue18b", "\ue18c", "\ue18d", "\ue18e", "\ue18f" };
 
@@ -43,6 +54,7 @@ static const Rule rules[] = {
 	 */
 	/* class     instance    title     tags mask     isfloating    monitor */
 	{ NULL,      NULL,       NULL,     0,            0,            -1 },
+  { NULL,      "spterm",   NULL,     SPTAG(0),     1,            -1 },
 };
 
 /* layout(s) */
@@ -76,12 +88,13 @@ static const char *termcmd[]  = { "st", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_s,      spawn,          {.v = dmenucmd } },
+	/*{ MODKEY,                       XK_s,      spawn,          {.v = dmenucmd } },*/
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_k,      focusstack,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_j,      focusstack,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_h,      incnmaster,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_l,      incnmaster,     {.i = -1 } },
+	{ MODKEY,                       XK_g,      togglescratch,  {.i = 0 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
   { MODKEY,                       XK_j,      setsmfact,      {.f = -0.05} },
