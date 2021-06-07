@@ -39,9 +39,11 @@ typedef struct {
 	const void *cmd;
 } Sp;
 const char *spcmd1[] = {"st", "-n", "spterm", "-g", "80x34", NULL };
+const char *spcmd2[] = {"st", "-n", "spncmpcpp", "-g", "80x34", "-e", "ncmpcpp", NULL };
 static Sp scratchpads[] = {
-	/* name          cmd  */
-	{"spterm",      spcmd1},
+	/* name           cmd  */
+	{"spterm",        spcmd1},
+	{"spncmpcpp",     spcmd2},
 };
 
 /* tagging */
@@ -52,9 +54,10 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class     instance    title     tags mask     isfloating    monitor */
-	{ NULL,      NULL,       NULL,     0,            0,            -1 },
-  { NULL,      "spterm",   NULL,     SPTAG(0),     1,            -1 },
+	/* class     instance     title     tags mask     isfloating    monitor */
+	{ NULL,      NULL,        NULL,     0,            0,            -1 },
+  { NULL,      "spterm",    NULL,     SPTAG(0),     1,            -1 },
+  { NULL,      "spncmpcpp", NULL,     SPTAG(1),     1,            -1 },
 };
 
 /* layout(s) */
@@ -90,11 +93,12 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	/*{ MODKEY,                       XK_s,      spawn,          {.v = dmenucmd } },*/
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_a,      togglescratch,  {.ui = 1 } },
 	{ MODKEY|ShiftMask,             XK_k,      focusstack,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_j,      focusstack,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_h,      incnmaster,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_l,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_g,      togglescratch,  {.i = 0 } },
+	{ MODKEY,                       XK_g,      togglescratch,  {.ui = 0 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
   { MODKEY,                       XK_j,      setsmfact,      {.f = -0.05} },
