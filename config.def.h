@@ -38,12 +38,12 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = {"st", "-n", "spterm", "-g", "80x34", NULL };
-const char *spcmd2[] = {"st", "-n", "spncmpcpp", "-g", "80x34", "-e", "ncmpcpp", NULL };
+const char *spcmd0[] = {"st", "-n", "spterm", "-c", "spterm", "-g", "80x34", NULL };
+const char *spcmd1[] = {"st", "-n", "spncmpcpp", "-c", "spncmpcpp", "-g", "80x34", "-e", "ncmpcpp", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
-	{"spterm",      spcmd1},
-	{"spncmpcpp",     spcmd2},
+	{"spterm",      spcmd0},
+	{"spncmpcpp",     spcmd1},
 };
 
 /* staticstatus */
