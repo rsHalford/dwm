@@ -40,10 +40,12 @@ typedef struct {
 } Sp;
 const char *spcmd0[] = {"st", "-n", "spterm", "-c", "spterm", "-g", "80x34", NULL };
 const char *spcmd1[] = {"st", "-n", "spncmpcpp", "-c", "spncmpcpp", "-g", "80x34", "-e", "ncmpcpp", NULL };
+const char *spcmd2[] = {"st", "-n", "spremind", "-c", "spremind", "-g", "80x34", "-e", "wyrd", NULL };
 static Sp scratchpads[] = {
 	/* name           cmd  */
 	{"spterm",        spcmd0},
 	{"spncmpcpp",     spcmd1},
+	{"spremind",      spcmd2},
 };
 
 /* tagging */
@@ -58,6 +60,7 @@ static const Rule rules[] = {
 	{ NULL,      NULL,        NULL,     0,            0,            -1 },
   { NULL,      "spterm",    NULL,     SPTAG(0),     1,            -1 },
   { NULL,      "spncmpcpp", NULL,     SPTAG(1),     1,            -1 },
+  { NULL,      "spremind",  NULL,     SPTAG(2),     1,            -1 },
 };
 
 /* layout(s) */
@@ -94,6 +97,7 @@ static Key keys[] = {
 	/*{ MODKEY,                       XK_s,      spawn,          {.v = dmenucmd } },*/
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_a,      togglescratch,  {.ui = 1 } },
+	{ MODKEY,                       XK_c,      togglescratch,  {.ui = 2 } },
 	{ MODKEY|ShiftMask,             XK_k,      focusstack,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_j,      focusstack,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_h,      incnmaster,     {.i = +1 } },
