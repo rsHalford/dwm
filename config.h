@@ -41,11 +41,13 @@ typedef struct {
 const char *spcmd0[] = {"st", "-n", "spterm", "-c", "spterm", "-g", "80x34", NULL };
 const char *spcmd1[] = {"st", "-n", "spncmpcpp", "-c", "spncmpcpp", "-g", "80x34", "-e", "ncmpcpp", NULL };
 const char *spcmd2[] = {"st", "-n", "spremind", "-c", "spremind", "-g", "80x34", "-e", "wyrd", NULL };
+const char *spcmd3[] = {"st", "-n", "spvolume", "-c", "spvolume", "-g", "80x34", "-e", "pulsemixer", NULL };
 static Sp scratchpads[] = {
 	/* name           cmd  */
 	{"spterm",        spcmd0},
 	{"spncmpcpp",     spcmd1},
 	{"spremind",      spcmd2},
+	{"spvolume",      spcmd3},
 };
 
 /* tagging */
@@ -61,6 +63,7 @@ static const Rule rules[] = {
   { NULL,      "spterm",    NULL,     SPTAG(0),     1,            -1 },
   { NULL,      "spncmpcpp", NULL,     SPTAG(1),     1,            -1 },
   { NULL,      "spremind",  NULL,     SPTAG(2),     1,            -1 },
+  { NULL,      "spvolume",  NULL,     SPTAG(3),     1,            -1 },
 };
 
 /* layout(s) */
@@ -112,6 +115,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY|ShiftMask,             XK_y,      togglebar,      {0} },
 	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[0]} },
+	{ MODKEY,                       XK_v,      togglescratch,  {.ui = 3 } },
 	{ MODKEY,                       XK_i,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_p,      setlayout,      {0} },
