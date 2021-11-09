@@ -24,12 +24,12 @@ static const char col_orange[]      = "#d65d0e";
 
 static const char *colors[][3]      = {
 	/*                    fg            bg          border*/
-	[SchemeNorm]      =   { col_gray3,  col_gray1,  col_gray1 },
-	[SchemeSel]       =   { col_white,  col_gray1,  col_gray2 },
-	[SchemeTagsNorm]  =   { col_gray3,  col_gray1,  col_gray1 },
-	[SchemeTagsSel]   =   { col_blue,   col_gray1,  col_gray1 },
-	[SchemeInfoNorm]  =   { col_gray3,  col_gray1,  col_gray1 },
-	[SchemeInfoSel]   =   { col_white,  col_gray1,  col_gray1 },
+  [SchemeNorm]      =   { col_gray3,  col_gray1,  col_gray1 },
+  [SchemeSel]       =   { col_white,  col_gray1,  col_blue  },
+  [SchemeTagsNorm]  =   { col_gray3,  col_gray1,  col_gray1 },
+  [SchemeTagsSel]   =   { col_blue,   col_gray1,  col_gray1 },
+  [SchemeInfoNorm]  =   { col_gray3,  col_gray1,  col_gray1 },
+  [SchemeInfoSel]   =   { col_white,  col_gray1,  col_gray1 },
   [SchemeStatus]    =   { col_gray3,  col_gray1,  col_gray1 },
 };
 
