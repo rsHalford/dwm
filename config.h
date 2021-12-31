@@ -54,16 +54,17 @@ static Sp scratchpads[] = {
 static const char *tags[] = { "\ue187", "\ue188", "\ue189", "\ue18a", "\ue18b", "\ue18c", "\ue18d", "\ue18e", "\ue18f" };
 
 static const Rule rules[] = {
-	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title
-	 */
-	/* class     instance     title     tags mask     isfloating    monitor */
-	{ NULL,      NULL,        NULL,     0,            0,            -1 },
-  { NULL,      "spterm",    NULL,     SPTAG(0),     1,            -1 },
-  { NULL,      "spncmpcpp", NULL,     SPTAG(1),     1,            -1 },
-  { NULL,      "spremind",  NULL,     SPTAG(2),     1,            -1 },
-  { NULL,      "spvolume",  NULL,     SPTAG(3),     1,            -1 },
+  /* xprop(1):
+   *	WM_CLASS(STRING) = instance, class
+   *	WM_NAME(STRING) = title
+   */
+  /* class          instance     title     tags mask     isfloating    monitor */
+  { NULL,           NULL,        NULL,     0,            0,            -1 },
+  { "pinentry-qt",  NULL,        NULL,     0,            1,            -1 },
+  { NULL,           "spterm",    NULL,     SPTAG(0),     1,            -1 },
+  { NULL,           "spncmpcpp", NULL,     SPTAG(1),     1,            -1 },
+  { NULL,           "spremind",  NULL,     SPTAG(2),     1,            -1 },
+  { NULL,           "spvolume",  NULL,     SPTAG(3),     1,            -1 },
 };
 
 /* layout(s) */
